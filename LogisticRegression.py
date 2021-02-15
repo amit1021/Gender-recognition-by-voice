@@ -43,7 +43,7 @@ def logistic_regreesion():
     X = df.iloc[:, 0:19].to_numpy()
     y = df.iloc[:, 19].to_numpy()
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
     clf = LogisticRegression(random_state=0, max_iter=3600).fit(X_train, y_train)
     clf.predict(X_test)

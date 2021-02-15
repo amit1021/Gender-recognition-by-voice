@@ -1,8 +1,6 @@
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from termcolor import colored
 
 def predict_KNN():
     df = pd.read_csv('voice.csv')
@@ -51,6 +49,6 @@ def KNN():
     classifier.fit(X_train,y_train)
 
     print("Score Train: {} ".format(classifier.score(X_train, y_train)))
-    print("Score Train: {} ".format(classifier.score(X_test, y_test)))
+    print("Score Test: {} ".format(classifier.score(X_test, y_test)))
 
 
