@@ -1,3 +1,4 @@
+from Adaboost import adaboost, predict_Adaboost
 from DecisionTree import predict_decision_tree, decision_tree
 from ExtractFeatures import spectral_properties, predict_one, predict_folder
 from KNN import predict_KNN, KNN
@@ -16,6 +17,9 @@ def predict():
     predict_KNN()
     print(colored("----------------------------------------SVM----------------------------------------", 'red'))
     predict_SVM()
+    print(colored("--------------------------------------Adaboost--------------------------------------", 'red'))
+    predict_Adaboost()
+
 
 # Gender recognition on dataset
 def score_on_dataset():
@@ -27,12 +31,15 @@ def score_on_dataset():
     KNN()
     print(colored("----------------------------------------SVM----------------------------------------", 'red'))
     SVM()
+    print(colored("--------------------------------------Adaboost--------------------------------------", 'red'))
+    adaboost()
+
 
 
 if __name__ == '__main__':
     # Prediction on one recording
-    predict_one("records/female/not_gonna_get_off.wav", "female")
-    predict()
+    # predict_one("records/male/ohad.wav", "male")
+    # predict()
 
     # Prediction on the recordings folder
     predict_folder()

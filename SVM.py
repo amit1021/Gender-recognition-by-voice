@@ -3,8 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 
+# Prediction on records
 def predict_SVM():
-    df = pd.read_csv('voice.csv')
+    df = pd.read_csv('Voice.csv')
     # get 0-3 columns in jumps of 2
     X = df.iloc[:, 0:19].to_numpy()
     y = df.iloc[:, 19].to_numpy()
@@ -45,9 +46,9 @@ def predict_SVM():
     print("Accuracy Train: ", sum_train)
 
 
-
+# Prediction on dataset Voice
 def SVM():
-    df = pd.read_csv('voice.csv')
+    df = pd.read_csv('Voice.csv')
     # get 0-3 columns in jumps of 2
     X = df.iloc[:, 0:19].to_numpy()
     y = df.iloc[:, 19].to_numpy()

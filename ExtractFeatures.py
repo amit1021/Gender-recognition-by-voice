@@ -3,6 +3,7 @@ import librosa
 import csv
 import glob
 
+# Extract the 10 features {mean, sd, mediam, Q25, Q75, IQR, skew, kutr, centroid}
 def spectral_properties(y: np.ndarray, fs: int, gender: str) -> dict:
     spec = np.abs(np.fft.rfft(y, axis=0))
     freq = np.fft.rfftfreq(len(y) ,1/fs)
@@ -12,7 +13,7 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str) -> dict:
     sd = np.sqrt(np.sum(amp * ((freq - mean) ** 2)))
     amp_cumsum = np.cumsum(amp)
     median = freq[len(amp_cumsum[amp_cumsum <= 0.5]) + 1]
-    mode = freq[amp.argmax()]
+    # mode = freq[amp.argmax()]
     Q25 = freq[len(amp_cumsum[amp_cumsum <= 0.25]) + 1]
     Q75 = freq[len(amp_cumsum[amp_cumsum <= 0.75]) + 1]
     IQR = Q75 - Q25
@@ -45,7 +46,6 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str) -> dict:
         'label': gender
 
     }
-
     return result_d
 
 

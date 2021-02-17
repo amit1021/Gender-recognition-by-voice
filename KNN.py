@@ -2,8 +2,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
+# Prediction on records
 def predict_KNN():
-    df = pd.read_csv('voice.csv')
+    df = pd.read_csv('Voice.csv')
     # get 0-3 columns in jumps of 2
     X = df.iloc[:, 0:19].to_numpy()
     y = df.iloc[:, 19].to_numpy()
@@ -36,10 +37,10 @@ def predict_KNN():
 
     print("Score Train: {} ".format(classifier.score(X_train, y_train)))
 
-
+# Prediction on dataset Voice
 def KNN():
-    df = pd.read_csv('voice.csv')
-    # get 0-19 columns
+    df = pd.read_csv('Voice.csv')
+    # get 0-19
     X = df.iloc[:, 0:19].to_numpy()
     y = df.iloc[:, 19].to_numpy()
 
