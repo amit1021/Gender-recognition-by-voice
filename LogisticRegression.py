@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 
 # Prediction on records
 def pedict_logistic_regreesion():
+    # The features of the train
     df = pd.read_csv('Voice.csv')
     # get 0-18 columns
     X = df.iloc[:, 0:19].to_numpy()
@@ -14,6 +15,7 @@ def pedict_logistic_regreesion():
     X_train = X
     y_train = y
 
+    # The features of the recording
     df1 = pd.read_csv('voiceTest.csv')
     X_test = df1.iloc[:, 0:19]
     y_test = df1.iloc[:, 19]

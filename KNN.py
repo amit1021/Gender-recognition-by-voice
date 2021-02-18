@@ -4,8 +4,9 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # Prediction on records
 def predict_KNN():
+    # The features of the train
     df = pd.read_csv('Voice.csv')
-    # get 0-3 columns in jumps of 2
+    # get 0-18 columns
     X = df.iloc[:, 0:19].to_numpy()
     y = df.iloc[:, 19].to_numpy()
 
@@ -13,8 +14,11 @@ def predict_KNN():
     X_train = X
     y_train = y
 
+    # The features of the recording
     df1 = pd.read_csv('voiceTest.csv')
+    # get 0-19 columns
     X_test = df1.iloc[:, 0:19]
+    # get 19 column
     y_test = df1.iloc[:, 19]
 
     classifier = KNeighborsClassifier(n_neighbors=3)
@@ -40,10 +44,12 @@ def predict_KNN():
 # Prediction on dataset Voice
 def KNN():
     df = pd.read_csv('Voice.csv')
-    # get 0-19
+    # get 0-18 columns
     X = df.iloc[:, 0:19].to_numpy()
+    # get 19 column
     y = df.iloc[:, 19].to_numpy()
 
+    # split the data into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
     classifier = KNeighborsClassifier(n_neighbors=3)
