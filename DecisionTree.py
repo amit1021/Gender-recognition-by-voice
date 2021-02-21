@@ -5,11 +5,11 @@ from sklearn.model_selection import train_test_split
 # Prediction on records
 def predict_decision_tree():
     # The features of the train
-    df = pd.read_csv('Voice.csv')
+    df = pd.read_csv('voice.csv')
     # get 0-18 columns
-    X = df.iloc[:, 0:19].to_numpy()
+    X = df.iloc[:, 0:10].to_numpy()
     # get 19 column
-    y = df.iloc[:, 19].to_numpy()
+    y = df.iloc[:, 10].to_numpy()
 
     # split the data into train and test
     X_train = X
@@ -17,8 +17,8 @@ def predict_decision_tree():
 
     # The features of the recording
     df1 = pd.read_csv('voiceTest.csv')
-    X_test = df1.iloc[:, 0:19]
-    y_test = df1.iloc[:, 19]
+    X_test = df1.iloc[:, 0:10]
+    y_test = df1.iloc[:, 10]
 
     clf = tree.DecisionTreeClassifier()
     clf = clf.fit(X_train, y_train)
@@ -46,11 +46,11 @@ def predict_decision_tree():
 # Prediction on dataset Voice
 def decision_tree():
 
-    df = pd.read_csv('Voice.csv')
+    df = pd.read_csv('voice.csv')
     # get 0-18 columns
-    X = df.iloc[:, 0:19].to_numpy()
+    X = df.iloc[:, 0:10].to_numpy()
     # get 19 column
-    y = df.iloc[:, 19].to_numpy()
+    y = df.iloc[:, 10].to_numpy()
 
     # split the data into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)

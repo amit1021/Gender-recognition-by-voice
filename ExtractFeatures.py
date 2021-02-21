@@ -2,9 +2,11 @@ import numpy as np
 import librosa
 import csv
 import glob
+from scipy.io import wavfile as wav
+from scipy.fftpack import fft
 
 # Extract the 10 features {mean, sd, mediam, Q25, Q75, IQR, skew, kutr, centroid}
-def spectral_properties(y: np.ndarray, fs: int, gender: str) -> dict:
+def spectral_properties(y: np.ndarray, fs: int, gender: str, filepath: str) -> dict:
     spec = np.abs(np.fft.rfft(y, axis=0))
     freq = np.fft.rfftfreq(len(y) ,1/fs)
     spec = np.abs(spec)
@@ -23,8 +25,15 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str) -> dict:
     kurt = ((z ** 4).sum() / (len(spec) - 1)) / w ** 4
     centroid = np.sum(spec*freq) / np.sum(spec)
 
+
+    rate, data = wav.read(filepath)
+    fft_out = fft(data)
+    combined = fft(data).ravel()
+    meanfunfreeq = float(sum(combined)/combined.size)
+    # print("meanfunfreeq: ", meanfunfreeq)
+
     result_d = {
-        'mean': mean,
+        'meanfreq': mean,
         'sd': sd,
         'median': median,
         'Q25': Q25,
@@ -32,19 +41,18 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str) -> dict:
         'IQR': IQR,
         'skew': skew,
         'kurt': kurt,
-        'sp.ent': 0.895135270228839,
-        'sfm': 0.40827905201623305,
-        'centroid':centroid ,
-        'meanfun': 0.14280667226092222,
-        'minfun' : 0.03679882384700927,
-        'maxfun': 0.25880081062844357,
-        'meandom': 0.8291581697223647,
-        'mindom': 0.05264066857299429,
-        'maxdom': 5.0470089964508285,
-        'dfrange':4.994368327901493,
-        'modindx':0.17375737330307212,
+        # 'sp.ent': 0.895135270228839,
+        # 'sfm': 0.40827905201623305,
+        'centroid':centroid,
+        'meanfun': meanfunfreeq/1000,
+        # 'minfun' : 0.03679882384700927,
+        # 'maxfun': 0.25880081062844357,
+        # 'meandom': 0.8291581697223647,
+        # 'mindom': 0.05264066857299429,
+        # 'maxdom': 5.0470089964508285,
+        # 'dfrange':4.994368327901493,
+        # 'modindx':0.17375737330307212,
         'label': gender
-
     }
     return result_d
 
@@ -54,12 +62,12 @@ def predict_folder():
     # male records
     for wav_file in glob.iglob('records/male/*'):
         y, sr = librosa.load(wav_file)
-        result_d = spectral_properties(y, 1 , "male")
+        result_d = spectral_properties(y, 1 , "male", wav_file)
         list_features.append(result_d)
     # female records
     for wav_file in glob.iglob('records/female/*'):
         y, sr = librosa.load(wav_file)
-        result_d = spectral_properties(y, 1 , "female")
+        result_d = spectral_properties(y, 1 , "female", wav_file)
         list_features.append(result_d)
 
     with open('voiceTest.csv', 'w', newline='') as csvfile:
@@ -70,7 +78,7 @@ def predict_folder():
 
 def predict_one(file_name, gender):
     y, sr = librosa.load(file_name)
-    result_d = spectral_properties(y, 1, gender)
+    result_d = spectral_properties(y, 1, gender, file_name)
     with open('voiceTest.csv', 'w', newline='') as csvfile:
         myWriter = csv.writer(csvfile)
         myWriter.writerow(result_d)

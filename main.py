@@ -38,7 +38,7 @@ def score_on_dataset():
 
 if __name__ == '__main__':
     # Prediction on one recording
-    # predict_one("records/male/ohad.wav", "male")
+    # predict_one("records/male/erectile_dysfunction.wav", "male")
     # predict()
 
     # Prediction on the recordings folder
