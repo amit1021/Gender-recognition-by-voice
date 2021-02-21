@@ -3,6 +3,7 @@ from DecisionTree import predict_decision_tree, decision_tree
 from ExtractFeatures import spectral_properties, predict_one, predict_folder
 from KNN import predict_KNN, KNN
 from LogisticRegression import pedict_logistic_regreesion, logistic_regreesion
+from RandomForest import random_foest, predict_random_forest
 from SVM import predict_SVM, SVM
 from termcolor import colored
 
@@ -19,6 +20,8 @@ def predict():
     predict_SVM()
     print(colored("--------------------------------------Adaboost--------------------------------------", 'red'))
     predict_Adaboost()
+    print(colored("--------------------------------------Random Forest--------------------------------------", 'red'))
+    predict_random_forest()
 
 
 # Gender recognition on dataset
@@ -33,6 +36,8 @@ def score_on_dataset():
     SVM()
     print(colored("--------------------------------------Adaboost--------------------------------------", 'red'))
     adaboost()
+    print(colored("--------------------------------------Random Forest--------------------------------------", 'red'))
+    random_foest()
 
 
 

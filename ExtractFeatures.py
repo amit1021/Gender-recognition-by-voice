@@ -15,7 +15,7 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str, filepath: str) -> d
     sd = np.sqrt(np.sum(amp * ((freq - mean) ** 2)))
     amp_cumsum = np.cumsum(amp)
     median = freq[len(amp_cumsum[amp_cumsum <= 0.5]) + 1]
-    # mode = freq[amp.argmax()]
+    mode = freq[amp.argmax()]
     Q25 = freq[len(amp_cumsum[amp_cumsum <= 0.25]) + 1]
     Q75 = freq[len(amp_cumsum[amp_cumsum <= 0.75]) + 1]
     IQR = Q75 - Q25
@@ -29,8 +29,7 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str, filepath: str) -> d
     rate, data = wav.read(filepath)
     fft_out = fft(data)
     combined = fft(data).ravel()
-    meanfunfreeq = float(sum(combined)/combined.size)
-    # print("meanfunfreeq: ", meanfunfreeq)
+    meanfun = float(sum(combined)/combined.size)
 
     result_d = {
         'meanfreq': mean,
@@ -43,8 +42,9 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str, filepath: str) -> d
         'kurt': kurt,
         # 'sp.ent': 0.895135270228839,
         # 'sfm': 0.40827905201623305,
+        'mode': mode,
         'centroid':centroid,
-        'meanfun': meanfunfreeq/1000,
+        'meanfun': meanfun/1000,
         # 'minfun' : 0.03679882384700927,
         # 'maxfun': 0.25880081062844357,
         # 'meandom': 0.8291581697223647,

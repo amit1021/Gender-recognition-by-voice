@@ -5,11 +5,11 @@ from sklearn.ensemble import AdaBoostClassifier
 # Prediction on records
 def predict_Adaboost():
     # The features of the train
-    df = pd.read_csv('voice.csv')
+    df = pd.read_csv('orginal_voice.csv')
     # get 0-18 columns
-    X = df.iloc[:, 0:10].to_numpy()
+    X = df.iloc[:, 0:11].to_numpy()
     # get 19 column
-    y = df.iloc[:, 10].to_numpy()
+    y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
     X_train = X
@@ -17,8 +17,8 @@ def predict_Adaboost():
 
     # The features of the recording
     df1 = pd.read_csv('voiceTest.csv')
-    X_test = df1.iloc[:, 0:10]
-    y_test = df1.iloc[:, 10]
+    X_test = df1.iloc[:, 0:11]
+    y_test = df1.iloc[:, 11]
 
     clf = AdaBoostClassifier(n_estimators=100, learning_rate=1)
     model = clf.fit(X_train, y_train)

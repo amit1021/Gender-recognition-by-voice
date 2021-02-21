@@ -6,19 +6,19 @@ from sklearn.model_selection import train_test_split
 # Prediction on records
 def pedict_logistic_regreesion():
     # The features of the train
-    df = pd.read_csv('voice.csv')
+    df = pd.read_csv('orginal_voice.csv')
     # get 0-18 columns
-    X = df.iloc[:, 0:10].to_numpy()
+    X = df.iloc[:, 0:11].to_numpy()
     # get 19 column
-    y = df.iloc[:, 10].to_numpy()
+    y = df.iloc[:, 11].to_numpy()
 
     X_train = X
     y_train = y
 
     # The features of the recording
     df1 = pd.read_csv('voiceTest.csv')
-    X_test = df1.iloc[:, 0:10]
-    y_test = df1.iloc[:, 10]
+    X_test = df1.iloc[:, 0:11]
+    y_test = df1.iloc[:, 11]
     clf = LogisticRegression(random_state=0, max_iter=3600).fit(X_train, y_train)
     clf.predict(X_test)
     clf.predict_proba(X_test)
