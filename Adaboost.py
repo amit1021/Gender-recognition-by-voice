@@ -5,10 +5,10 @@ from sklearn.ensemble import AdaBoostClassifier
 # Prediction on records
 def predict_Adaboost():
     # The features of the train
-    df = pd.read_csv('orginal_voice.csv')
-    # get 0-18 columns
+    df = pd.read_csv('voice.csv')
+    # get 0-10 columns
     X = df.iloc[:, 0:11].to_numpy()
-    # get 19 column
+    # get 11 column
     y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
@@ -25,7 +25,6 @@ def predict_Adaboost():
 
     predict = model.predict(X_test)
 
-
     if len(y_test) == 1:
         gender = y_test[0]
         print("Gender: {} ".format(predict), (predict == gender))
@@ -34,13 +33,14 @@ def predict_Adaboost():
 
     print("Score Train: {} ".format(model.score(X_train, y_train)))
 
+
 # Prediction on dataset Voice
 def adaboost():
     df = pd.read_csv('voice.csv')
-    # get 0-18 columns
-    X = df.iloc[:, 0:10].to_numpy()
-    # get 19 column
-    y = df.iloc[:, 10].to_numpy()
+    # get 0-10 columns
+    X = df.iloc[:, 0:11].to_numpy()
+    # get 11 column
+    y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)

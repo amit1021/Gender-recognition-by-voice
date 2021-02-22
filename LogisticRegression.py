@@ -4,12 +4,12 @@ from sklearn.model_selection import train_test_split
 
 
 # Prediction on records
-def pedict_logistic_regreesion():
+def predict_logistic_regreesion():
     # The features of the train
-    df = pd.read_csv('orginal_voice.csv')
-    # get 0-18 columns
+    df = pd.read_csv('voice.csv')
+    # get 0-10 columns
     X = df.iloc[:, 0:11].to_numpy()
-    # get 19 column
+    # get 11 column
     y = df.iloc[:, 11].to_numpy()
 
     X_train = X
@@ -39,16 +39,17 @@ def pedict_logistic_regreesion():
 
     print("Score Train: {} ".format(clf.score(X_train, y_train)))
 
+
 # Prediction on dataset Voice
 def logistic_regreesion():
     # read Voice file
     df = pd.read_csv('voice.csv')
-    # get 0-18 columns
-    X = df.iloc[:, 0:10].to_numpy()
-    # get 19 column
-    y = df.iloc[:, 10].to_numpy()
+    # get 0-10 columns
+    X = df.iloc[:, 0:11].to_numpy()
+    # get 11 column
+    y = df.iloc[:, 11].to_numpy()
     # split the data into train and test
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
     # Create Logistic Regression classifier object
     clf = LogisticRegression(random_state=0, max_iter=3600).fit(X_train, y_train)
     clf.predict(X_test)

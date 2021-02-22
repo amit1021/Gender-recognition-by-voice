@@ -24,10 +24,8 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str, filepath: str) -> d
     skew = ((z ** 3).sum() / (len(spec) - 1)) / w ** 3
     kurt = ((z ** 4).sum() / (len(spec) - 1)) / w ** 4
     centroid = np.sum(spec*freq) / np.sum(spec)
-
-
+    # get meanfun
     rate, data = wav.read(filepath)
-    fft_out = fft(data)
     combined = fft(data).ravel()
     meanfun = float(sum(combined)/combined.size)
 
@@ -40,18 +38,9 @@ def spectral_properties(y: np.ndarray, fs: int, gender: str, filepath: str) -> d
         'IQR': IQR,
         'skew': skew,
         'kurt': kurt,
-        # 'sp.ent': 0.895135270228839,
-        # 'sfm': 0.40827905201623305,
         'mode': mode,
         'centroid':centroid,
         'meanfun': meanfun/1000,
-        # 'minfun' : 0.03679882384700927,
-        # 'maxfun': 0.25880081062844357,
-        # 'meandom': 0.8291581697223647,
-        # 'mindom': 0.05264066857299429,
-        # 'maxdom': 5.0470089964508285,
-        # 'dfrange':4.994368327901493,
-        # 'modindx':0.17375737330307212,
         'label': gender
     }
     return result_d

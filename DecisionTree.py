@@ -5,10 +5,10 @@ from sklearn.model_selection import train_test_split
 # Prediction on records
 def predict_decision_tree():
     # The features of the train
-    df = pd.read_csv('orginal_voice.csv')
-    # get 0-18 columns
+    df = pd.read_csv('voice.csv')
+    # get 0-10 columns
     X = df.iloc[:, 0:11].to_numpy()
-    # get 19 column
+    # get 11 column
     y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
@@ -25,13 +25,6 @@ def predict_decision_tree():
 
     predict = clf.predict(X_test)
 
-    # for i in range(len(predict)):
-    #     if predict[i] == "male":
-    #         predict[i] = "female"
-    #     else:
-    #         predict[i] = "male"
-
-
     # we test one record
     if len(y_test) == 1:
         gender = y_test[0]
@@ -47,10 +40,10 @@ def predict_decision_tree():
 def decision_tree():
 
     df = pd.read_csv('voice.csv')
-    # get 0-18 columns
-    X = df.iloc[:, 0:10].to_numpy()
-    # get 19 column
-    y = df.iloc[:, 10].to_numpy()
+    # get 0-10 columns
+    X = df.iloc[:, 0:11].to_numpy()
+    # get 11 column
+    y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)

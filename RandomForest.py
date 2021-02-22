@@ -5,10 +5,10 @@ from sklearn.ensemble import RandomForestClassifier
 # Prediction on records
 def predict_random_forest():
     # The features of the train
-    df = pd.read_csv('orginal_voice.csv')
-    # get 0-18 columns
+    df = pd.read_csv('voice.csv')
+    # get 0-10 columns
     X = df.iloc[:, 0:11].to_numpy()
-    # get 19 column
+    # get 11 column
     y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
@@ -25,7 +25,6 @@ def predict_random_forest():
 
     predict = clf.predict(X_test)
 
-
     if len(y_test) == 1:
         gender = y_test[0]
         print("Gender: {} ".format(predict), (predict == gender))
@@ -35,18 +34,18 @@ def predict_random_forest():
     print("Score Train: {} ".format(clf.score(X_train, y_train)))
 
 
-
-def random_foest():
+def random_forest():
     df = pd.read_csv('voice.csv')
-    # get 0-18 columns
-    X = df.iloc[:, 0:19].to_numpy()
-    # get 19 column
-    y = df.iloc[:, 19].to_numpy()
+    # get 0-10 columns
+    X = df.iloc[:, 0:11].to_numpy()
+    # get 11 column
+    y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
     clf = RandomForestClassifier()
     clf.fit(X_train, y_train)
+
     print("Train" , clf.score(X_train ,y_train))
     print("Test",clf.score(X_test ,y_test))

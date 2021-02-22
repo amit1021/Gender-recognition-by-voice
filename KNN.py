@@ -5,9 +5,10 @@ from sklearn.neighbors import KNeighborsClassifier
 # Prediction on records
 def predict_KNN():
     # The features of the train
-    df = pd.read_csv('orginal_voice.csv')
-    # get 0-18 columns
+    df = pd.read_csv('voice.csv')
+    # get 0-10 columns
     X = df.iloc[:, 0:11].to_numpy()
+    # get 11 column
     y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
@@ -16,16 +17,15 @@ def predict_KNN():
 
     # The features of the recording
     df1 = pd.read_csv('voiceTest.csv')
-    # get 0-19 columns
+    # get 0-10 columns
     X_test = df1.iloc[:, 0:11]
-    # get 19 column
+    # get 11 column
     y_test = df1.iloc[:, 11]
 
     classifier = KNeighborsClassifier(n_neighbors=3)
     classifier.fit(X_train,y_train)
 
     y_pred = classifier.predict(X_test)
-
 
     for i in range(len(y_pred)):
         if y_pred[i] == "male":
@@ -44,10 +44,10 @@ def predict_KNN():
 # Prediction on dataset Voice
 def KNN():
     df = pd.read_csv('voice.csv')
-    # get 0-18 columns
-    X = df.iloc[:, 0:10].to_numpy()
-    # get 19 column
-    y = df.iloc[:, 10].to_numpy()
+    # get 0-10 columns
+    X = df.iloc[:, 0:11].to_numpy()
+    # get 11 column
+    y = df.iloc[:, 11].to_numpy()
 
     # split the data into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
